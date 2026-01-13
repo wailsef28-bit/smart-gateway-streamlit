@@ -5,7 +5,7 @@ import plotly.express as px
 st.set_page_config(page_title="Smart Gateway AI", layout="wide")
 
 # Load data
-features = pd.read_csv("features.csv")
+features = pd.read_csv("features_sample.csv")
 cnn = pd.read_csv("cnn_predictions.csv")
 decisions = pd.read_csv("decisions.csv")
 
