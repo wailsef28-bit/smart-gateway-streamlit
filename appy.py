@@ -49,3 +49,24 @@ df["explanation"] = df.apply(
     ),
     axis=1
 )
+st.divider()
+st.subheader("🤖 Q-Learning Decision Engine")
+
+# Select a time index
+idx = st.slider(
+    "Select time step",
+    min_value=0,
+    max_value=len(df) - 1,
+    value=0
+)
+
+# Show decision
+st.metric(
+    "Gateway Decision",
+    df.iloc[idx]["decision"]
+)
+
+st.info(df.iloc[idx]["decision_text"])
+
+st.markdown("### 🧠 Decision Explanation")
+st.write(df.iloc[idx]["explanation"])
