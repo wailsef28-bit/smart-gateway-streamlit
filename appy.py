@@ -34,3 +34,18 @@ st.plotly_chart(px.line(df, y="collision_risk"), use_container_width=True)
 st.subheader(" Gateway Decision")
 st.plotly_chart(px.line(df, y=(df["decision"]=="TRANSMIT").astype(int)),
                 use_container_width=True)
+
+# Interprétation humaine
+df["decision_text"] = df["decision"].map({
+    "WAIT": "⛔ WAIT – Packet buffered (collision risk too high)",
+    "TRANSMIT": "✅ TRANSMIT – Safe channel detected"
+})
+
+df["explanation"] = df.apply(
+    lambda row: (
+        "Q-Learning decided WAIT because CNN detected HIGH collision risk"
+        if row["decision"] == "WAIT"
+        else "Q-Learning decided TRANSMIT because collision risk is LOW"
+    ),
+    axis=1
+)
